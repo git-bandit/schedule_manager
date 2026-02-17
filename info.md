@@ -102,12 +102,13 @@ Windows, panels, dialogs, and listeners.
 
 # Request flow
 
+```text
 User clicks "Add Task"
        ↓
 TasksPanel (UI) → ScheduleController → TaskService → TaskRepository → Database
        ↑                                                                    ↓
        └─────────────── UI refresh with new data ◄─────────────────────────┘
-
+```
 
 
 ---
