@@ -13,7 +13,7 @@ schedule_researcher/
     ├── repository/            # Database access
     ├── domain/                # Data models / entities
     └── integration/           # External services (e.g. AI)
-
+```
 ---
 
 # Layer-by-layer
@@ -102,3 +102,16 @@ Windows, panels, dialogs, and listeners.
 
 # Request flow
 
+User clicks "Add Task"
+       ↓
+TasksPanel (UI) → ScheduleController → TaskService → TaskRepository → Database
+       ↑                                                                    ↓
+       └─────────────── UI refresh with new data ◄─────────────────────────┘
+
+
+
+---
+
+# Maven layout
+
+`src/main/java/` is the standard Maven directory for production Java code. `pom.xml` at the root defines the build and dependencies.
