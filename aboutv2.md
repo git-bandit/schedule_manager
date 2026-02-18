@@ -3,14 +3,17 @@
 
 ### Tehnologii și cerințe generale
 
-* Limbaj: **Java**
-* GUI: **Swing (JFrame + JPanel)**
-* Persistență: **SQLite local** (fișier `.db`) accesată prin **JDBC** (`sqlite-jdbc`)
+* Limbaj: **Java 17**
+* Build: **Maven**
+* GUI: **Swing** (JFrame + JPanel)
+* Persistență: **MySQL** (JDBC `mysql-connector-j` 8.3.0)
+* Alte dependențe: OkHttp (API AI), Gson (JSON)
 * Aplicație: **single-user local**
 * Stocare: **local only** (fără sincronizare)
-* Documentație: **Javadoc** pentru clasele principale și metodele publice
+* Documentație: **Javadoc** pentru clase și metode; generare: `mvn javadoc:javadoc`
 * Arhitectură: separare pe straturi **ui / controller / domain / service / repository / integration**
 * Validări: intervale orare valide (end > start), câmpuri obligatorii, consistență date
+* Teste: **JUnit 5** — teste unitare și de integrare (vezi `src/test/java/`)
 
 ---
 
@@ -65,7 +68,7 @@ Comparația dintre Plan și Actual permite:
 
 ## AI (API extern)
 
-Aplicația trimite un rezumat zilnic (statistici + deviații + listă taskuri planificate vs realizate) către un **API extern** (HTTP). API-ul returnează:
+Aplicația trimite un rezumat zilnic (statistici + deviații + listă taskuri planificate vs realizate) către un **API extern** (HTTP). URL implicit: `http://localhost:8080/api/insights`. API-ul returnează:
 
 * un scurt text cu **insight-uri**
 * **recomandări** (ex. reducerea blocurilor dimineața, planificare realistă, reordonare taskuri etc.)
@@ -148,35 +151,55 @@ Culoarea/tag este **mapată** la:
 
 ---
 
-## Persistență (SQLite)
+## Persistență (MySQL)
 
-Date persistate în baza de date SQLite:
+Date persistate în baza de date **MySQL**:
 
-* foldere taskuri
-* taskuri
-* selecția pentru Today (taskuri selectate pe zi)
-* planificările (plan blocks)
-* activitățile reale (activity sessions)
-* (opțional) statistici zilnice salvate ca “snapshot”/raport
+* foldere taskuri (`task_folders`)
+* taskuri (`tasks`)
+* selecția pentru Today (`today_tasks` — taskuri selectate pe zi)
+* planificările (`plan_blocks`)
+* activitățile reale (`actual_sessions`)
+* statistici zilnice (opțional, “snapshot”)
 
-DB este locală: fișier `.db` (ex. `schedule_manager.db`), acces prin JDBC.
+**Configurare:** baza `schedule_manager` pe `localhost:3306`; proprietăți: `db.host`, `db.port`, `db.name`, `db.user`, `db.password`. Detalii în `DATABASE_SETUP.md`.
 
 ---
 
 ## Livrabile și calitate
 
 * structură pe pachete: `ui`, `controller`, `domain`, `service`, `repository`, `integration`
-* Javadoc pentru clasele principale
+* Javadoc pentru clasele principale; generare: `mvn javadoc:javadoc` → `target/site/apidocs/`
 * validări input (end > start, date obligatorii, prevenire intervale invalide)
 * UI responsive: operațiile DB rulate în afara thread-ului UI (ex. `SwingWorker`)
 
 ---
 
-Dacă vrei, următorul pas (tot “Cursor-ready”) este să-ți scriu:
+## Rulare aplicație
 
-* lista de **ecrane/panouri** din JFrame (layout + componente),
-* **entitățile** (câmpuri exacte) + **tabelele SQLite** (DDL),
-* interfețele `Repository` + `Service` (metode publice) ca skeleton.
+1. MySQL pornit; creează baza: `CREATE DATABASE schedule_manager;`
+2. Din IDE: rulează `MainWindow.main()` (clasa: `schedulemanager.ui.MainWindow`)
+3. Din Maven: `mvn exec:java -Dexec.mainClass="schedulemanager.ui.MainWindow"`
+4. Parolă MySQL (dacă există): `-Ddb.password=parola`
+
+---
+
+## Teste
+
+* Framework: **JUnit 5**; baza pentru teste: `schedule_manager_test`
+* Rulare: `mvn test` sau Testing sidebar în VS Code
+* Detalii: vezi `TESTE.md`
+
+### Fișiere utile
+
+| Fișier | Rol |
+|--------|-----|
+| `DATABASE_SETUP.md` | Setup MySQL |
+| `TESTE.md` | Cum rulezi testele |
+| `pom.xml` | Maven: Java 17, dependențe (MySQL, OkHttp, Gson, JUnit) |
+
+---
+
 
 
 ---
@@ -187,14 +210,17 @@ English
 
 ### Technologies and General Requirements
 
-* Language: **Java**
-* GUI: **Swing (JFrame + JPanel)**
-* Persistence: **Local SQLite** (a `.db` file) accessed via **JDBC** (`sqlite-jdbc`)
+* Language: **Java 17**
+* Build: **Maven**
+* GUI: **Swing** (JFrame + JPanel)
+* Persistence: **MySQL** (JDBC `mysql-connector-j` 8.3.0)
+* Other dependencies: OkHttp (AI API), Gson (JSON)
 * Application type: **single-user local**
 * Storage: **local only** (no sync)
-* Documentation: **Javadoc** for core classes and public methods
+* Documentation: **Javadoc** for classes and methods; generate: `mvn javadoc:javadoc`
 * Architecture: layered separation **ui / controller / domain / service / repository / integration**
 * Validation: valid time ranges (end > start), required fields, data consistency
+* Testing: **JUnit 5** — unit and integration tests (see `src/test/java/`)
 
 ---
 
@@ -248,7 +274,7 @@ Comparing Plan vs Actual enables:
 
 ## AI (External API)
 
-The app sends a daily summary (statistics + deviations + planned vs completed task list) to an **external HTTP API**. The API returns:
+The app sends a daily summary (statistics + deviations + planned vs completed task list) to an **external HTTP API**. Default URL: `http://localhost:8080/api/insights`. The API returns:
 
 * a short text with **insights**
 * **recommendations** (e.g., reduce morning blocks, plan more realistically, reorder tasks, etc.)
@@ -331,25 +357,50 @@ Color/tag is **mapped** to:
 
 ---
 
-## Persistence (SQLite)
+## Persistence (MySQL)
 
-Data persisted in the SQLite database:
+Data persisted in the **MySQL** database:
 
-* task folders
-* tasks
-* Today selection (tasks selected per day)
-* planning blocks (plan blocks)
-* real activities (activity sessions)
+* task folders (`task_folders`)
+* tasks (`tasks`)
+* Today selection (`today_tasks` — tasks selected per day)
+* planning blocks (`plan_blocks`)
+* real activities (`actual_sessions`)
 * (optional) daily statistics saved as a “snapshot”/report
 
-The DB is local: a `.db` file (e.g., `schedule_manager.db`), accessed via JDBC.
+**Configuration:** database `schedule_manager` on `localhost:3306`; properties: `db.host`, `db.port`, `db.name`, `db.user`, `db.password`. See `DATABASE_SETUP.md`.
+
+---
+
+## Running the Application
+
+1. MySQL running; create DB: `CREATE DATABASE schedule_manager;`
+2. From IDE: run `MainWindow.main()` (class: `schedulemanager.ui.MainWindow`)
+3. From Maven: `mvn exec:java -Dexec.mainClass="schedulemanager.ui.MainWindow"`
+4. MySQL password (if set): `-Ddb.password=yourpassword`
+
+---
+
+## Testing
+
+* Framework: **JUnit 5**
+* Integration tests: MySQL, database `schedule_manager_test` (create it first)
+* Run: `mvn test` or Testing sidebar in VS Code
+* Structure: see `TESTE.md`
 
 ---
 
 ## Deliverables and Quality
 
 * package structure: `ui`, `controller`, `domain`, `service`, `repository`, `integration`
-* Javadoc for core classes
+* Javadoc for core classes; generate: `mvn javadoc:javadoc` → `target/site/apidocs/`
 * input validation (end > start, required fields, prevention of invalid intervals)
-* responsive UI: DB operations executed off the UI thread (e.g., using `SwingWorker`)
+* responsive UI: DB operations executed off the UI thread (`SwingWorker`)
 
+### Key Files
+
+| File | Role |
+|------|------|
+| `DATABASE_SETUP.md` | MySQL setup |
+| `TESTE.md` | How to run tests |
+| `pom.xml` | Maven: Java 17, dependencies (MySQL, OkHttp, Gson, JUnit) |
