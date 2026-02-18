@@ -1,0 +1,7 @@
+schedulemanager
+schedulemanager.controller
+schedulemanager.domain
+schedulemanager.integration
+schedulemanager.repository
+schedulemanager.service
+schedulemanager.ui

@@ -26,13 +26,7 @@
     </properties>
 
     <dependencies>
-        <!-- SQLite JDBC Driver (default - works without setup) -->
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>3.44.1.0</version>
-        </dependency>
-        <!-- MySQL JDBC Driver (optional - use -Ddb.type=mysql) -->
+        <!-- MySQL JDBC Driver -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -52,6 +46,14 @@
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,10 +70,42 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.6.3</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <charset>UTF-8</charset>
+                    <doclint>none</doclint>
+                    <windowtitle>Schedule Manager API</windowtitle>
+                    <doctitle>Schedule Manager API Documentation</doctitle>
+                    <bottom>Schedule Manager - Time management and task tracking application</bottom>
+                    <show>protected</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>javadoc-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <doclint>none</doclint>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <db.name>schedule_manager_test</db.name>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

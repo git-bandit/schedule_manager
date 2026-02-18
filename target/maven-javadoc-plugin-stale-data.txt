@@ -1,0 +1,66 @@
+@options
+@packages
+-classpath
+'C:/Users/flori/.m2/repository/org/xerial/sqlite-jdbc/3.44.1.0/sqlite-jdbc-3.44.1.0.jar;C:/Users/flori/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar;C:/Users/flori/.m2/repository/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar;C:/Users/flori/.m2/repository/com/google/protobuf/protobuf-java/3.25.1/protobuf-java-3.25.1.jar;C:/Users/flori/.m2/repository/com/squareup/okhttp3/okhttp/4.12.0/okhttp-4.12.0.jar;C:/Users/flori/.m2/repository/com/squareup/okio/okio/3.6.0/okio-3.6.0.jar;C:/Users/flori/.m2/repository/com/squareup/okio/okio-jvm/3.6.0/okio-jvm-3.6.0.jar;C:/Users/flori/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.9.10/kotlin-stdlib-common-1.9.10.jar;C:/Users/flori/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.21/kotlin-stdlib-jdk8-1.8.21.jar;C:/Users/flori/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.8.21/kotlin-stdlib-1.8.21.jar;C:/Users/flori/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar;C:/Users/flori/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.21/kotlin-stdlib-jdk7-1.8.21.jar;C:/Users/flori/.m2/repository/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/flori/Documents/git-proj/schedule_researcher/src/main/java'
+-author
+-bottom
+'Schedule Manager - Time management and task tracking application'
+-charset
+'UTF-8'
+-d
+'C:/Users/flori/Documents/git-proj/schedule_researcher/target/site/apidocs'
+-docencoding
+'UTF-8'
+-Xdoclint:none
+-doctitle
+'Schedule Manager API Documentation'
+-nohelp
+-use
+-version
+-windowtitle
+'Schedule Manager API'
+schedulemanager.controller
+schedulemanager.domain
+schedulemanager.integration
+schedulemanager
+schedulemanager.repository
+schedulemanager.service
+schedulemanager.ui
+C:\Users\flori\.m2\repository\org\xerial\sqlite-jdbc\3.44.1.0\sqlite-jdbc-3.44.1.0.jar = 1765578478462
+C:\Users\flori\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar = 1765578479542
+C:\Users\flori\.m2\repository\com\mysql\mysql-connector-j\8.3.0\mysql-connector-j-8.3.0.jar = 1771345254603
+C:\Users\flori\.m2\repository\com\google\protobuf\protobuf-java\3.25.1\protobuf-java-3.25.1.jar = 1771345255513
+C:\Users\flori\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar = 1765578478978
+C:\Users\flori\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar = 1765578479560
+C:\Users\flori\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar = 1765578478770
+C:\Users\flori\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar = 1765578478770
+C:\Users\flori\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar = 1765578478966
+C:\Users\flori\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar = 1765578479312
+C:\Users\flori\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar = 1765578479151
+C:\Users\flori\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar = 1765578479178
+C:\Users\flori\.m2\repository\com\google\code\gson\gson\2.10.1\gson-2.10.1.jar = 1765578479347
+C:\Users\flori\Documents\git-proj\schedule_researcher\src\main\java = 1765744196795
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\allclasses-index.html = 1771404523564
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\allpackages-index.html = 1771404523564
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\element-list = 1771404522898
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\index-all.html = 1771404523623
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\index.html = 1771404523502
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\jquery-ui.overrides.css = 1771404523680
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\member-search-index.js = 1771404523583
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\module-search-index.js = 1771404523564
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\overview-summary.html = 1771404523635
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\overview-tree.html = 1771404523485
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\package-search-index.js = 1771404523578
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\script.js = 1771404523635
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\search.js = 1771404523635
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\serialized-form.html = 1771404523146
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\stylesheet.css = 1771404523635
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\tag-search-index.js = 1771404523585
+C:\Users\flori\Documents\git-proj\schedule_researcher\target\site\apidocs\type-search-index.js = 1771404523580
