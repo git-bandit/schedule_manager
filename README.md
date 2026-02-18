@@ -1,8 +1,8 @@
 # Schedule Manager (Java Desktop)
 
-## Student(i)
+## Student
 
-[Nume Student]
+Zlatovcen Florin-Petru
 
 ## Descriere
 
