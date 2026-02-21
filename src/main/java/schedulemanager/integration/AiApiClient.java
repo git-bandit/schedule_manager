@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 
+import schedulemanager.domain.PlanBlock;
+import schedulemanager.domain.ActualSession;
+import com.google.gson.JsonArray;
+import java.util.List;
+
 import okhttp3.*;
 
 /**
@@ -57,8 +62,13 @@ public class AiApiClient {
         try {
             DailyStatistics stats = statsService.computeDailyStats(date);
             Map<Long, StatsService.TaskStats> taskStats = statsService.computeTaskStats(date);
+            var planBlocks = statsService.getPlanBlocks(date);
+            var actualSessions = statsService.getActualSessions(date);
+
+            JsonObject requestBody = buildRequestBody(date, stats, taskStats, planBlocks, actualSessions);            
+
             
-            JsonObject requestBody = buildRequestBody(date, stats, taskStats);
+            //JsonObject requestBody = buildRequestBody(date, stats, taskStats);
             return sendRequest(requestBody);
         } catch (Exception e) {
             return getFallbackInsights(date);
@@ -73,8 +83,13 @@ public class AiApiClient {
      * @param taskStats task-to-task statistics
      * @return JSON object representing the request
      */
-    private JsonObject buildRequestBody(LocalDate date, DailyStatistics stats,
-                                       Map<Long, StatsService.TaskStats> taskStats) {
+    private JsonObject buildRequestBody(
+        LocalDate date,
+        DailyStatistics stats,
+        Map<Long, StatsService.TaskStats> taskStats,
+        java.util.List<schedulemanager.domain.PlanBlock> planBlocks,
+        java.util.List<schedulemanager.domain.ActualSession> actualSessions
+    ) {
         JsonObject body = new JsonObject();
         body.addProperty("date", date.toString());
         body.addProperty("plannedMinutes", stats.getPlannedMinutes());
@@ -83,6 +98,28 @@ public class AiApiClient {
         body.addProperty("quantitativeAccuracy", stats.getQuantitativeAccuracy());
         body.addProperty("temporalAccuracy", stats.getTemporalAccuracy());
         
+        // Add plan calendar lines
+        JsonArray planArr = new JsonArray();
+        if (planBlocks != null) {
+            for (PlanBlock b : planBlocks) {
+                String line = String.format("%s-%s: %s",
+                        b.getStartTime(), b.getEndTime(), b.getTitle());
+                planArr.add(line);
+            }
+        }
+        body.add("planCalendar", planArr);
+
+        // Add actual calendar lines
+        JsonArray actualArr = new JsonArray();
+        if (actualSessions != null) {
+            for (ActualSession s : actualSessions) {
+                String line = String.format("%s-%s: %s",
+                        s.getStartTime(), s.getEndTime(), s.getTitle());
+                actualArr.add(line);
+            }
+        }
+        body.add("actualCalendar", actualArr);
+
         // Add task statistics
         JsonObject tasksJson = new JsonObject();
         for (Map.Entry<Long, StatsService.TaskStats> entry : taskStats.entrySet()) {

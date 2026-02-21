@@ -206,5 +206,13 @@ public class StatsService {
         public List<PlanBlock> plannedBlocks = new ArrayList<>();
         public List<ActualSession> actualSessions = new ArrayList<>();
     }
+
+    public List<PlanBlock> getPlanBlocks(LocalDate date) throws SQLException {
+        return planRepository.findByDate(date);
+    }
+    
+    public List<ActualSession> getActualSessions(LocalDate date) throws SQLException {
+        return activityRepository.findByDate(date);
+    }
 }
 
